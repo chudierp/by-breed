@@ -1,12 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, FlatList, ScrollView, SafeAreaView, Text, View } from 'react-native';
+
+
+import { cats } from './breeds'
+import Item from './Item'
 
 export default function App() {
+  console.log(cats)
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <FlatList
+        data = {cats}
+        renderItem={({ item, index }) => {
+          return <Item title={`${index} ${item.breed}`} />
+        }}
+        keyExtractor={item => item.breed}
+
+      />
+      
   );
 }
 
