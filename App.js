@@ -1,17 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, FlatList, SafeAreaView, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, FlatList, SafeAreaView, TextInput, View } from 'react-native';
 
 
 import { cats } from './breeds'
 import Item from './Item'
 
 export default function App() {
-  console.log(cats)
+  const [search, setSearch] = useState('')
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style='auto' />
       <View style={styles.listContainer}>
         <FlatList
-          data = {cats}
+          data = {cats.filter(item => item.breed.includes(search))}
           renderItem={({ item }) => {
             return <Item data={item} />
           }}
@@ -19,6 +22,12 @@ export default function App() {
 
         />
       </View>
+      <TextInput 
+        style={styles.search}
+        placeholder='Search'
+        onChangeText={setSearch}
+        value={search}
+      />
     </SafeAreaView>
   );
 }
@@ -32,5 +41,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  search: {
+    fontSize: 24,
+    padding: 10,
+    margin: 2
   },
 });
