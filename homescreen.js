@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { View, KeyboardAvoidingView, Platform,  FlatList, SafeAreaView, TextInput } from 'react-native';
+import { Button, View, KeyboardAvoidingView, Platform,  FlatList, SafeAreaView, TextInput } from 'react-native';
 import { useState } from 'react';
 import { StyleSheet} from 'react-native';
-import { cats } from './breeds'
+import { dogs } from './breeds'
 import Item from './Item'
 import { StatusBar } from 'expo-status-bar';
 
-function HomeScreen() {
+
+function HomeScreen({navigation}) {
     const [search, setSearch] = useState('')
 
     return (
@@ -19,9 +20,20 @@ function HomeScreen() {
             
                 <View style={styles.listContainer}>
                     <FlatList
-                    data = {cats.filter(item => item.breed.includes(search))}
+                    data = {dogs.filter(item => item.breed.includes(search))}
                     renderItem={({ item }) => {
-                        return <Item data={item} />
+                        console.log(item)
+                        return (
+                        <View>    
+                            <Item dog={item} />
+                            <Button
+                                title='Details'
+                                onPress={() => navigation.navigate('Features', {
+                                item:{item}
+                                })}
+                            />
+                        </View>
+                        )
                     }}
                     keyExtractor={item => item.breed}
                     />
