@@ -1,44 +1,42 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-function Feature({route}) {
-    const item = route.params.item.item;
-    const keys = Object.keys(item)
+
+const star = "⭐️"
+
+function DetailsScreen({ navigation, route }) {
+    const data = route.params
+    const keys = Object.keys(data)
+    
     return (
-        <>
-            <Text>{item['breed']}</Text>
-            <View style={styles.keysContainer}>
-                <View>
-                    {keys.filter(key => key != 'breed').map(key => { 
-                    let rate = "";
-                    for(let i = 0; i < item[key]; i += 1) {
-                        rate += "⭐️"
-                    }
-                    return (
-                    // <Feature name={key} value={rate} />
-                        <Text>{key}: {rate}</Text>
-                    )
-                    })}
-                </View>
+        <View>
+        {keys.filter((name) => name != 'breed').map((key) => {
+            return (
+            <View style={styles.details}>
+                <Text>{key}:</Text>
+                <Text>{star.repeat(parseInt(data[key]))}</Text>
             </View>
-        </>
+            )
+        })}
+        </View>
     )
 }
-export default Feature
 
 const styles = StyleSheet.create({
-    container: {
-        display: 'flex',
+    item: {
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: 'grey'
+    },
+    title: {
+        fontSize: 32,
+    },
+    details: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 5
+        justifyContent: 'space-between'
     },
-    name: {
-        fontSize: 16
-    },
-    value: {
-        fontSize: 16,
-        fontWeight: 'bold'
-    }
-
-})
+});
+  
+    export default DetailsScreen;

@@ -1,36 +1,36 @@
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
 
-   
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-// import Feature from './feature'
+const Item = ({ title, data, navigation }) => {
 
-function Item(props) {
-	const {dog} = props
-	const {breed} = dog
-	
-	return (
-		<View style= {styles.container}>
-			<Text style={styles.header}>{breed}</Text>
-		</View>
-	);
+  // const keys = Object.keys(data)
+
+  return (
+    <TouchableHighlight
+      style={styles.item}
+      onPress={() => navigation.navigate('Details', data)}
+    >
+      <View>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </TouchableHighlight>
+  )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 10,
-		margin: 1,
-		backgroundColor: 'white',
-		alignItems: 'center',
-		justifyContent: 'center',
-		borderWidth: 3,
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey'
+  },
+  title: {
+    fontSize: 30,
+  },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
+});
 
-	},
-	header: {
-		width: '100%',
-		fontSize: 20,
-		
-	}
-})
-
-export default Item
+export default Item;
