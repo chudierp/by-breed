@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
 
 const star = "⭐️"
@@ -9,34 +10,27 @@ function DetailsScreen({ navigation, route }) {
     const keys = Object.keys(data)
     
     return (
-        <View>
-        {keys.filter((name) => name != 'breed').map((key) => {
-            return (
-            <View style={styles.details}>
-                <Text>{key}:</Text>
-                <Text>{star.repeat(parseInt(data[key]))}</Text>
+        <ScrollView>
+            <View>
+            {keys.filter((name) => name != 'breed').map((key) => {
+                return (
+                <View style={styles.details}>
+                    <Text style={styles.title}>{key}:</Text>
+                    <Text style={styles.stars}>{star.repeat(parseInt(data[key]))}</Text>
+                </View>
+                )
+            })}
             </View>
-            )
-        })}
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    item: {
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: 'grey'
-    },
-    title: {
-        fontSize: 32,
-    },
     details: {
+        margin: 20,
         flexDirection: 'row',
         justifyContent: 'space-between'
-    },
+    }
 });
   
     export default DetailsScreen;

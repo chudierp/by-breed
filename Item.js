@@ -6,12 +6,12 @@ const Item = ({ title, data, navigation }) => {
 
   return (
     <TouchableHighlight
-      style={styles.item}
-      onPress={() => navigation.navigate('Details', data)}
-    >
-      <View>
-        <Text style={styles.title}>{title}</Text>
-      </View>
+		style={styles.item}
+		onPress={() => navigation.navigate('Details', data)}
+	>
+		<View>
+			<Text style={styles.title}>{title}</Text>
+		</View>
     </TouchableHighlight>
   )
 }
